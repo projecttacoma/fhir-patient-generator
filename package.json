@@ -1,0 +1,24 @@
+{
+  "name": "patient-generator",
+  "version": "1.0.0",
+  "description": "A tool for generating eCQM-specific patient data using [Synthea](https://github.com/synthetichealth/synthea)",
+  "main": "loadCqfRuler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/projecttacoma/fhir-patient-generator.git"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/projecttacoma/fhir-patient-generator/issues"
+  },
+  "homepage": "https://github.com/projecttacoma/fhir-patient-generator#readme",
+  "dependencies": {
+    "commander": "^4.1.0",
+    "fhir-crud-client": "^1.1.0",
+    "lodash": "^4.17.15"
+  }
+}
