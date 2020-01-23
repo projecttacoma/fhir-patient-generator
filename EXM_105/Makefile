@@ -21,6 +21,21 @@ connectathon:
   -H 'Content-Type: application/json' \
 	-d @connectathon/fhir3/bundles/EXM105_FHIR3-8.0.000/EXM105_FHIR3-8.0.000-bundle.json
 
+.seed-cqf-ruler-no-vs:
+	until `curl --output /dev/null --silent --head --fail http://localhost:8080/cqf-ruler-dstu3`; do printf '.'; sleep 5; done
+	curl -X POST \
+  http://localhost:8080/cqf-ruler-dstu3/fhir \
+  -H 'Content-Type: application/json' \
+	-d @connectathon/fhir3/bundles/EXM105_FHIR3-8.0.000/EXM105_FHIR3-8.0.000-files/library-deps-EXM105_FHIR3-8.0.000-bundle.json
+	curl -X PUT \
+  http://localhost:8080/cqf-ruler-dstu3/fhir/Library/library-EXM105-FHIR3-8.0.000 \
+  -H 'Content-Type: application/json' \
+	-d @connectathon/fhir3/bundles/EXM105_FHIR3-8.0.000/EXM105_FHIR3-8.0.000-files/library-EXM105_FHIR3-8.0.000.json
+	curl -X PUT \
+  http://localhost:8080/cqf-ruler-dstu3/fhir/Measure/measure-EXM105-FHIR3-8.0.000 \
+  -H 'Content-Type: application/json' \
+	-d @connectathon/fhir3/bundles/EXM105_FHIR3-8.0.000/EXM105_FHIR3-8.0.000-files/measure-EXM105_FHIR3-8.0.000.json
+
 synthea:
 	git clone --single-branch --branch abacus --depth 1 https://github.com/projecttacoma/synthea.git
 
@@ -30,7 +45,7 @@ generate-patients:
 
 CQL_FILE := connectathon/fhir3/bundles/EXM105_FHIR3-8.0.000/EXM105_FHIR3-8.0.000-files/EXM105_FHIR3-8.0.000.cql
 calculate-patients:
-	calculate-bundles -d ./synthea/output/fhir_stu3 -c $(CQL_FILE) -u http://localhost:8080/cqf-ruler-dstu3/fhir
+	calculate-bundles -d ./synthea/output/fhir_stu3 -c $(CQL_FILE) -u http://localhost:8080/cqf-ruler-dstu3/fhir --measure-id measure-EXM105-FHIR3-8.0.000
 
 clean:
 	-docker stop cqf-ruler
