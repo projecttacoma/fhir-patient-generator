@@ -12,7 +12,8 @@ info:
 	./load-cqf-ruler.sh $(MEASURE_DIR)
 
 .restart-cqf-ruler:
-	docker stop cqf-ruler || true && docker run --name cqf-ruler --rm -dit -p 8080:8080 contentgroup/cqf-ruler:develop
+	-docker stop cqf-ruler
+	docker run --name cqf-ruler --rm -dit -p 8080:8080 contentgroup/cqf-ruler:develop
 
 .update-cqf-ruler-image: .seed-cqf-ruler-no-vs .run-load-script
 	docker tag $(shell docker commit cqf-ruler) tacoma/cqf-ruler-preloaded:$(VERSION)
