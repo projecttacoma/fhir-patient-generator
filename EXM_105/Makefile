@@ -20,6 +20,7 @@ connectathon:
   http://localhost:8080/cqf-ruler-dstu3/fhir \
   -H 'Content-Type: application/json' \
 	-d @connectathon/fhir3/bundles/EXM105_FHIR3-8.0.000/EXM105_FHIR3-8.0.000-bundle.json
+	touch .seed-cqf-ruler
 
 .seed-cqf-ruler-no-vs:
 	until `curl --output /dev/null --silent --head --fail http://localhost:8080/cqf-ruler-dstu3`; do printf '.'; sleep 5; done
@@ -35,6 +36,7 @@ connectathon:
   http://localhost:8080/cqf-ruler-dstu3/fhir/Measure/measure-EXM105-FHIR3-8.0.000 \
   -H 'Content-Type: application/json' \
 	-d @connectathon/fhir3/bundles/EXM105_FHIR3-8.0.000/EXM105_FHIR3-8.0.000-files/measure-EXM105_FHIR3-8.0.000.json
+	touch .seed-cqf-ruler-no-vs
 
 synthea:
 	git clone --single-branch --branch abacus --depth 1 https://github.com/projecttacoma/synthea.git
@@ -49,6 +51,6 @@ calculate-patients:
 
 clean:
 	-docker stop cqf-ruler
-	-rm -rf synthea output connectathon .cqf-ruler .seed-cqf-ruler .generate-patients .calculate-patients .setup-cqf-ruler
+	-rm -rf synthea output connectathon .cqf-ruler .seed-cqf-ruler .seed-cqf-ruler-no-vs .generate-patients .calculate-patients .setup-cqf-ruler
 
 .PHONY: all clean info
