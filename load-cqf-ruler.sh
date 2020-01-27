@@ -8,7 +8,7 @@ fi
 
 cd $1
 BASE_URL="http://localhost:8080/cqf-ruler-dstu3/fhir"
-OUTPUT_DIR="output/$(ls -t 'output')"
+OUTPUT_DIR="output/$(ls -t 'output' | head -1)"
 
 check_success() {
   if [ $? -ne 0 ]
