@@ -16,8 +16,7 @@ info:
 	docker run --name cqf-ruler --rm -dit -p 8080:8080 contentgroup/cqf-ruler:develop
 
 .update-cqf-ruler-image: .seed-cqf-ruler-no-vs .run-load-script
-	docker tag $(shell docker commit cqf-ruler) tacoma/cqf-ruler-preloaded:$(VERSION)
-	docker push tacoma/cqf-ruler-preloaded:$(VERSION)
+	./release-docker-image.sh $(VERSION)
 
 clean:
 	-docker stop cqf-ruler
