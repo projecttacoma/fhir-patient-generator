@@ -18,8 +18,8 @@ connectathon:
 
 .seed-cqf-ruler:
 	until `curl --output /dev/null --silent --head --fail http://localhost:8080/cqf-ruler-dstu3`; do printf '.'; sleep 5; done
-	curl -X POST \
-  http://localhost:8080/cqf-ruler-dstu3/fhir/Measure \
+	curl -X PUT \
+  http://localhost:8080/cqf-ruler-dstu3/fhir/Measure/measure-exm124-FHIR3 \
   -H 'Content-Type: application/json' \
 	-d @connectathon/fhir3/resources/measure/measure-EXM124_FHIR3-7.2.000.json
 	curl -X POST \
@@ -32,6 +32,18 @@ connectathon:
 	-d @connectathon/fhir3/resources/valuesets/valuesets-EXM124_FHIR3-7.2.000.json
 	touch .seed-cqf-ruler
 
+.seed-cqf-ruler-no-vs:
+	until `curl --output /dev/null --silent --head --fail http://localhost:8080/cqf-ruler-dstu3`; do printf '.'; sleep 5; done
+	curl -X PUT \
+  http://localhost:8080/cqf-ruler-dstu3/fhir/Measure/measure-exm124-FHIR3 \
+  -H 'Content-Type: application/json' \
+	-d @connectathon/fhir3/resources/measure/measure-EXM124_FHIR3-7.2.000.json
+	curl -X POST \
+  http://localhost:8080/cqf-ruler-dstu3/fhir \
+  -H 'Content-Type: application/json' \
+	-d @connectathon/fhir3/resources/library/all-libraries-bundle.json
+	touch .seed-cqf-ruler-no-vs
+
 synthea:
 	git clone --single-branch --branch abacus https://github.com/projecttacoma/synthea.git
 
@@ -41,11 +53,11 @@ generate-patients:
 
 CQL_FILE := EXM124_FHIR3-7.2.000.cql
 calculate-patients:
-	calculate-bundles -d ./synthea/output/fhir_stu3 -c $(CQL_FILE) -u http://localhost:8080/cqf-ruler-dstu3/fhir -s "2018-01-01" -e "2018-12-31"
+	calculate-bundles -d ./synthea/output/fhir_stu3 -c $(CQL_FILE) -u http://localhost:8080/cqf-ruler-dstu3/fhir -s "2018-01-01" -e "2018-12-31" -m measure-exm124-FHIR3
 
 clean:
 	-docker stop cqf-ruler
-	-rm -rf synthea output connectathon .cqf-ruler .seed-cqf-ruler .generate-patients .calculate-patients .setup-cqf-ruler
+	-rm -rf synthea output connectathon .cqf-ruler .seed-cqf-ruler .seed-cqf-ruler-no-vs .generate-patients .calculate-patients .setup-cqf-ruler
 
 .PHONY: all clean info
 .SECONDARY: main-build
