@@ -1,4 +1,4 @@
-library EXM124_FHIR3 version '7.2.000'
+library EXM124_FHIR4 version '8.2.000'
 
 /*
 Based on CMS124v7 - Cervical Cancer Screening
@@ -11,13 +11,13 @@ of finding conventions and usage patterns that meet the needs of the various sta
 in the measure development community.
 */
 
-using FHIR version '3.0.0'
+using FHIR version '4.0.0'
 
-include MATGlobalCommonFunctions_FHIR3 version '2.0.000' called Global
-include AdultOutpatientEncounters_FHIR3 version '1.1.000' called AdultOutpatientEncounters
-include Hospice_FHIR3 version '1.0.000' called Hospice
-include FHIRHelpers version '3.0.0' called FHIRHelpers
-include SupplementalDataElements_FHIR3 version '1.0.0' called SDE
+include FHIRHelpers version '4.0.0' called FHIRHelpers
+include Hospice_FHIR4 version '1.0.000' called Hospice
+include AdultOutpatientEncounters_FHIR4 version '1.1.000' called AdultOutpatientEncounters
+include MATGlobalCommonFunctions_FHIR4 version '4.0.000' called Global
+include SupplementalDataElements_FHIR4 version '1.0.0' called SDE
 
 codesystem "SNOMEDCT:2017-09": 'http://snomed.info/sct/731000124108' version 'http://snomed.info/sct/731000124108/version/201709'
 
@@ -37,6 +37,7 @@ valueset "HPV Test": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.4
 code "Congenital absence of cervix (disorder)": '37687000' from "SNOMEDCT:2017-09" display 'Congenital absence of cervix (disorder)'
 
 parameter "Measurement Period" Interval<DateTime>
+  default Interval[@2019-01-01T00:00:00.0, @2020-01-01T00:00:00.0)
 
 context Patient
 
@@ -66,22 +67,19 @@ define "Pap Test with Results":
 
 define "Pap Test Within 3 Years":
 	"Pap Test with Results" PapTest
-		where PapTest.effective 3 years or less before end of "Measurement Period"
+		where Global."Normalize Interval"(PapTest.effective) ends 3 years or less before end of "Measurement Period"
 
 define "PapTest Within 5 Years":
 	( "Pap Test with Results" PapTestOver30YearsOld
-			where Global."CalendarAgeInYearsAt"(FHIRHelpers.ToDate(Patient.birthDate), start of Global."Get Choice Interval - dateTime or Period"(PapTestOver30YearsOld.effective))>= 30
-				and PapTestOver30YearsOld.effective 5 years or less before end of "Measurement Period"
+			where Global."CalendarAgeInYearsAt"(FHIRHelpers.ToDate(Patient.birthDate), start of Global."Normalize Interval"(PapTestOver30YearsOld.effective))>= 30
+				and Global."Normalize Interval"(PapTestOver30YearsOld.effective) ends 5 years or less before end of "Measurement Period"
 	)
 
 define "Pap Test With HPV Within 5 Years":
 	"PapTest Within 5 Years" PapTestOver30YearsOld
 		with [Observation: "HPV Test"] HPVTest
 			such that HPVTest.value is not null
-				and (
-					HPVTest.effective starts 1 day or less before or on day of start of Global."Get Choice Interval - dateTime or Period"(PapTestOver30YearsOld.effective)
-						or HPVTest.effective starts less than 1 day after or on day of start of Global."Get Choice Interval - dateTime or Period"(PapTestOver30YearsOld.effective)
-				)
+        and Global."Normalize Interval"(HPVTest.effective) starts within 1 day of start of Global."Normalize Interval"(PapTestOver30YearsOld.effective)
 				and HPVTest.status in { 'final', 'amended', 'corrected', 'preliminary' }
 
 define "Denominator Exclusion":
@@ -91,12 +89,12 @@ define "Denominator Exclusion":
 
 define "Absence of Cervix":
 	[Condition : "Congenital absence of cervix (disorder)"] NoCervixBirth
-		where NoCervixBirth.onset as FHIR.dateTime before end "Measurement Period"
-			and NoCervixBirth.clinicalStatus = 'active'
+		where Global."Normalize Onset"(NoCervixBirth.onset) starts before end of "Measurement Period"
+      and NoCervixBirth.clinicalStatus ~ ToConcept(Global."active")
 
 define "Surgical Absence of Cervix":
 	[Procedure: "Hysterectomy with No Residual Cervix"] NoCervixHysterectomy
-		where NoCervixHysterectomy.performed ends before end "Measurement Period"
+		where Global."Normalize Interval"(NoCervixHysterectomy.performed) ends before end of "Measurement Period"
 			and NoCervixHysterectomy.status = 'completed'
 
 define "Initial Population":
