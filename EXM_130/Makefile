@@ -46,7 +46,7 @@ connectathon:
 	curl -X POST \
   http://localhost:8080/cqf-ruler-r4/fhir/ \
   -H 'Content-Type: application/json' \
-	-d @EXM130_FHIR4-7.2.000/EXM130_FHIR4-7.2.000-bundle.json
+	-d @connectathon/fhir4/bundles/EXM130_FHIR4-7.2.000/EXM130_FHIR4-7.2.000-bundle.json
 	touch .seed-cqf-ruler-r4
 
 .seed-cqf-ruler-no-vs:
@@ -70,15 +70,15 @@ connectathon:
 	curl -X PUT \
   http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-exm130-FHIR4 \
   -H 'Content-Type: application/json' \
-	-d @connectathon/fhir3/resources/measure/measure-EXM130_FHIR4-7.2.000.json
+	-d @connectathon/fhir4/bundles/EXM130_FHIR4-7.2.000/EXM130_FHIR4-7.2.000-files/measure-EXM130_FHIR4-7.2.000.json
 	curl -X POST \
   http://localhost:8080/cqf-ruler-r4/fhir/ \
   -H 'Content-Type: application/json' \
-	-d @EXM_130_bundle.json
+	-d @connectathon/fhir4/bundles/EXM130_FHIR4-7.2.000/EXM130_FHIR4-7.2.000-files/library-EXM130_FHIR4-7.2.000.json 
 	curl -X POST \
-  http://localhost:8080/cqf-ruler-r4/fhir \
+  http://localhost:8080/cqf-ruler-r4/fhir/ \
   -H 'Content-Type: application/json' \
-	-d @connectathon/fhir3/resources/library/all-libraries-bundle.json
+	-d @connectathon/fhir4/bundles/EXM130_FHIR4-7.2.000/EXM130_FHIR4-7.2.000-files/library-deps-EXM130_FHIR4-7.2.000-bundle.json
 	touch .seed-cqf-ruler-no-vs-r4
 
 synthea:
