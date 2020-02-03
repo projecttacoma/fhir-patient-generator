@@ -10,7 +10,7 @@ info:
 	touch .setup-cqf-ruler
 
 .setup-cqf-ruler-r4: .cqf-ruler connectathon .seed-cqf-ruler-r4
-	touch .setup-cqf-ruler
+	touch .setup-cqf-ruler-r4:
 
 .cqf-ruler:
 	docker run --name cqf-ruler --rm -dit -p 8080:8080 contentgroup/cqf-ruler:latest
