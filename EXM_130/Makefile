@@ -89,11 +89,13 @@ SYNTHEA_PROPS := synthea/src/main/resources/synthea.properties
 generate-patients:
 	sed 's/exporter.fhir.export = true/exporter.fhir.export = false/g' $(SYNTHEA_PROPS) > temp
 	sed 's/exporter.fhir_stu3.export = false/exporter.fhir_stu3.export = true/g' temp > $(SYNTHEA_PROPS)
+	rm -rf temp
 	cd synthea && ./run_synthea -a 51-51 -p $(PATIENT_COUNT) -m EXM130*
 
 generate-patients-r4:
 	sed 's/exporter.fhir.export = false/exporter.fhir.export = true/g' $(SYNTHEA_PROPS) > temp
 	sed 's/exporter.fhir_stu3.export = true/exporter.fhir_stu3.export = false/g' temp > $(SYNTHEA_PROPS)
+	rm -rf temp
 	cd synthea && ./run_synthea -a 51-51 -p $(PATIENT_COUNT) -m EXM130-r4*
 
 calculate-patients:
@@ -104,6 +106,6 @@ calculate-patients-r4:
 
 clean:
 	-docker stop cqf-ruler
-	-rm -rf synthea output connectathon .cqf-ruler .seed-cqf-ruler .seed-cqf-ruler-r4 .seed-cqf-ruler-no-vs .seed-cqf-ruler-no-vs-r4 .generate-patients .generate-patients-r4 .calculate-patients .setup-cqf-ruler .setup-cqf-ruler-r4
+	-rm -rf synthea output connectathon .cqf-ruler .seed-cqf-ruler .seed-cqf-ruler-r4 .seed-cqf-ruler-no-vs .seed-cqf-ruler-no-vs-r4 .generate-patients .generate-patients-r4 .calculate-patients .setup-cqf-ruler .setup-cqf-ruler-r4 temp
 
 .PHONY: all clean info
