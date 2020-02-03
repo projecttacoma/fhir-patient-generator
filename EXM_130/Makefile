@@ -66,17 +66,17 @@ connectathon:
 	touch .seed-cqf-ruler-no-vs
 
 .seed-cqf-ruler-no-vs-r4:
-	until `curl --output /dev/null --silent --head --fail http://localhost:8080/cqf-ruler-dstu3`; do printf '.'; sleep 5; done
+	until `curl --output /dev/null --silent --head --fail http://localhost:8080/cqf-ruler-r4`; do printf '.'; sleep 5; done
 	curl -X PUT \
-  http://localhost:8080/cqf-ruler-dstu3/fhir/Measure/measure-exm130-FHIR4 \
+  http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-exm130-FHIR4 \
   -H 'Content-Type: application/json' \
 	-d @connectathon/fhir3/resources/measure/measure-EXM130_FHIR4-7.2.000.json
 	curl -X POST \
-  http://localhost:8080/cqf-ruler-dstu3/fhir/ \
+  http://localhost:8080/cqf-ruler-r4/fhir/ \
   -H 'Content-Type: application/json' \
 	-d @EXM_130_bundle.json
 	curl -X POST \
-  http://localhost:8080/cqf-ruler-dstu3/fhir \
+  http://localhost:8080/cqf-ruler-r4/fhir \
   -H 'Content-Type: application/json' \
 	-d @connectathon/fhir3/resources/library/all-libraries-bundle.json
 	touch .seed-cqf-ruler-no-vs-r4
