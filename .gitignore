@@ -2,7 +2,7 @@ output
 synthea
 connectathon
 .cqf-ruler
-.seed-cqf-ruler
-.seed-cqf-ruler-no-vs
-.setup-cqf-ruler
+.seed-cqf-ruler*
+.seed-cqf-ruler-no-vs*
+.setup-cqf-ruler*
 *.csv
