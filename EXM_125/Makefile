@@ -85,7 +85,7 @@ generate-patients-r4:
 	cd synthea && ./run_synthea -a 52-52 -g F -p $(PATIENT_COUNT) -m EXM125-r4*
 
 calculate-patients:
-	calculate-bundles -d ./synthea/output/fhir_stu3 -c ./connectathon/fhir3/bundles/EXM125_FHIR3-7.2.000/EXM125_FHIR3-7.2.000-files/EXM125_FHIR3-7.2.000.cql -u http://localhost:8080/cqf-ruler-dstu3/fhir -m measure-EXM125_FHIR3-7.2.000
+	calculate-bundles -d ./synthea/output/fhir_stu3 -c ./connectathon/fhir3/bundles/EXM125_FHIR3-7.2.000/EXM125_FHIR3-7.2.000-files/EXM125_FHIR3-7.2.000.cql -u http://localhost:8080/cqf-ruler-dstu3/fhir -m measure-EXM125-FHIR3-7.2.000
 
 calculate-patients-r4:
 	calculate-bundles -d ./synthea/output/fhir -c ./connectathon/fhir4/bundles/EXM125_FHIR4-7.2.000/EXM125_FHIR4-7.2.000-files/EXM125_FHIR4-7.2.000.cql -u http://localhost:8080/cqf-ruler-r4/fhir -m measure-EXM125-FHIR4-7.2.000
