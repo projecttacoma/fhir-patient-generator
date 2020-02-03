@@ -19,7 +19,6 @@ info:
 connectathon:
 	$(info connectathon checks out a specific commit SHA in case filepaths are updated)
 	git clone https://github.com/DBCG/connectathon.git
-	cd connectathon && git checkout 425795fb8dd39e213140493f22e77880a9257f00
 
 .seed-cqf-ruler:
 	until `curl --output /dev/null --silent --head --fail http://localhost:8080/cqf-ruler-dstu3`; do printf '.'; sleep 5; done
