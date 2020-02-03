@@ -82,7 +82,7 @@ connectathon:
 	touch .seed-cqf-ruler-no-vs-r4
 
 synthea:
-	git clone --single-branch --branch EXM130-r4 https://github.com/projecttacoma/synthea.git
+	git clone --single-branch --branch abacus https://github.com/projecttacoma/synthea.git
 
 PATIENT_COUNT := 10
 SYNTHEA_PROPS := synthea/src/main/resources/synthea.properties
