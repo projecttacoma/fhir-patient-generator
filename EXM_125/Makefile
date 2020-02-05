@@ -10,7 +10,7 @@ info:
 	touch .setup-cqf-ruler
 
 .setup-cqf-ruler-r4: .cqf-ruler connectathon .seed-cqf-ruler-r4
-	touch .setup-cqf-ruler
+	touch .setup-cqf-ruler-r4
 
 .cqf-ruler:
 	docker run --name cqf-ruler --rm -dit -p 8080:8080 contentgroup/cqf-ruler
@@ -33,7 +33,7 @@ connectathon:
   http://localhost:8080/cqf-ruler-r4/fhir \
   -H 'Content-Type: application/json' \
 	-d @connectathon/fhir4/bundles/EXM125_FHIR4-7.2.000/EXM125_FHIR4-7.2.000-bundle.json
-	touch .seed-cqf-ruler
+	touch .seed-cqf-ruler-r4
 
 .seed-cqf-ruler-no-vs:
 	until `curl --output /dev/null --silent --head --fail http://localhost:8080/cqf-ruler-dstu3`; do printf '.'; sleep 5; done
@@ -65,7 +65,7 @@ connectathon:
   http://localhost:8080/cqf-ruler-r4/fhir/Library/library-EXM125-FHIR4-7.2.000 \
   -H 'Content-Type: application/json' \
 	-d @./connectathon/fhir4/bundles/EXM125_FHIR4-7.2.000/EXM125_FHIR4-7.2.000-files/library-EXM125_FHIR4-7.2.000.json
-	touch .seed-cqf-ruler-no-vs
+	touch .seed-cqf-ruler-no-vs-r4
 
 synthea:
 	git clone --single-branch --branch abacus https://github.com/projecttacoma/synthea.git
