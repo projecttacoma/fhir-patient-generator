@@ -17,28 +17,14 @@ info:
 	touch .cqf-ruler
 
 connectathon:
-	$(info connectathon checks out a specific commit SHA in case filepaths are updated)
 	git clone https://github.com/DBCG/connectathon.git
-	cd connectathon && git checkout 425795fb8dd39e213140493f22e77880a9257f00
 
 .seed-cqf-ruler:
 	until `curl --output /dev/null --silent --head --fail http://localhost:8080/cqf-ruler-dstu3`; do printf '.'; sleep 5; done
-	curl -X PUT \
-  http://localhost:8080/cqf-ruler-dstu3/fhir/Measure/measure-exm130-FHIR3 \
-  -H 'Content-Type: application/json' \
-	-d @connectathon/fhir3/resources/measure/measure-EXM130_FHIR3-7.2.000.json
 	curl -X POST \
   http://localhost:8080/cqf-ruler-dstu3/fhir/ \
   -H 'Content-Type: application/json' \
-	-d @EXM_130_bundle.json
-	curl -X POST \
-  http://localhost:8080/cqf-ruler-dstu3/fhir \
-  -H 'Content-Type: application/json' \
-	-d @connectathon/fhir3/resources/library/all-libraries-bundle.json
-	curl -X POST \
-  http://localhost:8080/cqf-ruler-dstu3/fhir \
-  -H 'Content-Type: application/json' \
-	-d @connectathon/fhir3/resources/valuesets/valuesets-EXM130_FHIR3-7.2.000.json
+	-d @connectathon/fhir3/bundles/EXM130_FHIR3-7.2.000/EXM130_FHIR3-7.2.000-bundle.json
 	touch .seed-cqf-ruler
 
 .seed-cqf-ruler-r4:
@@ -46,39 +32,39 @@ connectathon:
 	curl -X POST \
   http://localhost:8080/cqf-ruler-r4/fhir/ \
   -H 'Content-Type: application/json' \
-	-d @EXM130_FHIR4-7.2.000/EXM130_FHIR4-7.2.000-bundle.json
+	-d @connectathon/fhir4/bundles/EXM130_FHIR4-7.2.000/EXM130_FHIR4-7.2.000-bundle.json
 	touch .seed-cqf-ruler-r4
 
 .seed-cqf-ruler-no-vs:
 	until `curl --output /dev/null --silent --head --fail http://localhost:8080/cqf-ruler-dstu3`; do printf '.'; sleep 5; done
 	curl -X PUT \
-  http://localhost:8080/cqf-ruler-dstu3/fhir/Measure/measure-exm130-FHIR3 \
+  http://localhost:8080/cqf-ruler-dstu3/fhir/Measure/measure-EXM130-FHIR3-7.2.000 \
   -H 'Content-Type: application/json' \
-	-d @connectathon/fhir3/resources/measure/measure-EXM130_FHIR3-7.2.000.json
-	curl -X POST \
-  http://localhost:8080/cqf-ruler-dstu3/fhir/ \
+	-d @connectathon/fhir3/bundles/EXM130_FHIR3-7.2.000/EXM130_FHIR3-7.2.000-files/measure-EXM130_FHIR3-7.2.000.json
+	curl -X PUT \
+  http://localhost:8080/cqf-ruler-dstu3/fhir/Library/library-EXM130-FHIR3-7.2.000 \
   -H 'Content-Type: application/json' \
-	-d @EXM_130_bundle.json
+	-d @connectathon/fhir3/bundles/EXM130_FHIR3-7.2.000/EXM130_FHIR3-7.2.000-files/library-EXM130_FHIR3-7.2.000.json
 	curl -X POST \
   http://localhost:8080/cqf-ruler-dstu3/fhir \
   -H 'Content-Type: application/json' \
-	-d @connectathon/fhir3/resources/library/all-libraries-bundle.json
+	-d @connectathon/fhir3/bundles/EXM130_FHIR3-7.2.000/EXM130_FHIR3-7.2.000-files/library-deps-EXM130_FHIR3-7.2.000-bundle.json
 	touch .seed-cqf-ruler-no-vs
 
 .seed-cqf-ruler-no-vs-r4:
 	until `curl --output /dev/null --silent --head --fail http://localhost:8080/cqf-ruler-r4`; do printf '.'; sleep 5; done
 	curl -X PUT \
-  http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-exm130-FHIR4 \
+  http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM130-FHIR4-7.2.000 \
   -H 'Content-Type: application/json' \
-	-d @connectathon/fhir3/resources/measure/measure-EXM130_FHIR4-7.2.000.json
+	-d @connectathon/fhir4/bundles/EXM130_FHIR4-7.2.000/EXM130_FHIR4-7.2.000-files/measure-EXM130_FHIR4-7.2.000.json
+	curl -X PUT \
+  http://localhost:8080/cqf-ruler-r4/fhir/Library/library-EXM130-FHIR4-7.2.000 \
+  -H 'Content-Type: application/json' \
+	-d @connectathon/fhir4/bundles/EXM130_FHIR4-7.2.000/EXM130_FHIR4-7.2.000-files/library-EXM130_FHIR4-7.2.000.json 
 	curl -X POST \
   http://localhost:8080/cqf-ruler-r4/fhir/ \
   -H 'Content-Type: application/json' \
-	-d @EXM_130_bundle.json
-	curl -X POST \
-  http://localhost:8080/cqf-ruler-r4/fhir \
-  -H 'Content-Type: application/json' \
-	-d @connectathon/fhir3/resources/library/all-libraries-bundle.json
+	-d @connectathon/fhir4/bundles/EXM130_FHIR4-7.2.000/EXM130_FHIR4-7.2.000-files/library-deps-EXM130_FHIR4-7.2.000-bundle.json
 	touch .seed-cqf-ruler-no-vs-r4
 
 synthea:
@@ -99,7 +85,7 @@ generate-patients-r4:
 	cd synthea && ./run_synthea -a 51-51 -p $(PATIENT_COUNT) -m EXM130-r4*
 
 calculate-patients:
-	calculate-bundles -d ./synthea/output/fhir_stu3 -c EXM130_FHIR3.cql -u http://localhost:8080/cqf-ruler-dstu3/fhir -m measure-exm130-FHIR3
+	calculate-bundles -d ./synthea/output/fhir_stu3 -c ./connectathon/fhir3/bundles/EXM130_FHIR3-7.2.000/EXM130_FHIR3-7.2.000-files/EXM130_FHIR3-7.2.000.cql -u http://localhost:8080/cqf-ruler-dstu3/fhir -m measure-EXM130-FHIR3-7.2.000
 
 calculate-patients-r4:
 	calculate-bundles -d ./synthea/output/fhir -c ./EXM130_FHIR4-7.2.000/EXM130_FHIR4-7.2.000-files/EXM130_FHIR4-7.2.000.cql -u http://localhost:8080/cqf-ruler-r4/fhir -m measure-EXM130-FHIR4-7.2.000
