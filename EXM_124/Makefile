@@ -54,7 +54,7 @@ connectathon:
 .seed-cqf-ruler-no-vs-r4:
 	until `curl --output /dev/null --silent --head --fail http://localhost:8080/cqf-ruler-r4`; do printf '.'; sleep 5; done
 	curl -X PUT \
-  http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM124_FHIR4-8.2.000 \
+  http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM124-FHIR4-8.2.000 \
   -H 'Content-Type: application/json' \
 	-d @connectathon/fhir4/bundles/EXM124_FHIR4-8.2.000/EXM124_FHIR4-8.2.000-files/measure-EXM124_FHIR4-8.2.000.json
 	curl -X POST \
