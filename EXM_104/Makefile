@@ -50,7 +50,7 @@ connectathon:
 .seed-cqf-ruler-no-vs:
 	until `curl --output /dev/null --silent --head --fail http://localhost:8080/cqf-ruler-dstu3`; do printf '.'; sleep 5; done
 	curl -X PUT \
-  http://localhost:8080/cqf-ruler-dstu3/fhir/Measure/measure-exm104-FHIR3 \
+  http://localhost:8080/cqf-ruler-dstu3/fhir/Measure/measure-EXM104-FHIR3-8.1.000 \
   -H 'Content-Type: application/json' \
 	-d @connectathon/fhir3/resources/measure/measure-EXM104_FHIR3-8.1.000.json
 	curl -X POST \
@@ -82,7 +82,7 @@ connectathon:
 .seed-cqf-ruler-no-vs-r4:
 	until `curl --output /dev/null --silent --head --fail http://localhost:8080/cqf-ruler-r4`; do printf '.'; sleep 5; done
 	curl -X PUT \
-  http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-exm104-FHIR4 \
+  http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM104-FHIR4-8.1.000 \
   -H 'Content-Type: application/json' \
 	-d @connectathon/fhir4/bundles/EXM104_FHIR4-8.1.000/EXM104_FHIR4-8.1.000-files/measure-EXM104_FHIR4-8.1.000.json
 	curl -X POST \
