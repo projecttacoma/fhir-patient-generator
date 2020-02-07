@@ -17,7 +17,6 @@ info:
 	touch .cqf-ruler
 
 connectathon:
-	$(info connectathon checks out a specific commit SHA in case filepaths are updated)
 	git clone https://github.com/DBCG/connectathon.git
 
 .seed-cqf-ruler:
@@ -85,7 +84,7 @@ connectathon:
 	curl -X PUT \
   http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-exm104-FHIR4 \
   -H 'Content-Type: application/json' \
-	-d @connectathon/fhir4/resources/measure/measure-EX104_FHIR4-8.1.000.json
+	-d @connectathon/fhir4/bundles/EXM104_FHIR4-8.1.000/EXM104_FHIR4-8.1.000-files/measure-EXM104_FHIR4-8.1.000.json
 	curl -X POST \
   http://localhost:8080/cqf-ruler-r4/fhir/ \
   -H 'Content-Type: application/json' \
@@ -93,11 +92,11 @@ connectathon:
 	curl -X POST \
   http://localhost:8080/cqf-ruler-r4/fhir \
   -H 'Content-Type: application/json' \
-	-d @connectathon/fhir4/resources/library/all-libraries-bundle.json
+	-d @connectathon/fhir4/bundles/EXM105_FHIR4-8.1.000/EXM105_FHIR4-8.1.000-files/library-deps-EXM105_FHIR4-8.1.000-bundle.json
 	touch .seed-cqf-ruler-no-vs-r4
 
 synthea:
-	git clone --single-branch --branch exm_104_r4 --depth 1 https://github.com/projecttacoma/synthea.git
+	git clone --single-branch --branch abacus --depth 1 https://github.com/projecttacoma/synthea.git
 
 PATIENT_COUNT := 10
 SYNTHEA_PROPS := synthea/src/main/resources/synthea.properties
