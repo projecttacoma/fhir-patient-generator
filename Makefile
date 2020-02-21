@@ -45,7 +45,7 @@ connectathon:
   		-H 'Content-Type: application/json' \
 		-d @./connectathon/fhir4/bundles/EXM124_FHIR4-8.2.000/EXM124_FHIR4-8.2.000-files/library-EXM124_FHIR4-8.2.000.json
 	# CMS 125
-	curl -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM125_FHIR4-7.2.000 \
+	curl -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM125-FHIR4-7.2.000 \
 		-H 'Content-Type: application/json' \
 		-d @connectathon/fhir4/bundles/EXM125_FHIR4-7.2.000/EXM125_FHIR4-7.2.000-files/measure-EXM125_FHIR4-7.2.000.json
 	curl -X POST http://localhost:8080/cqf-ruler-r4/fhir \
