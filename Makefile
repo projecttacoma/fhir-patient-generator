@@ -12,6 +12,7 @@ stu3: .setup-cqf-ruler-stu3 synthea generate-patients-stu3 calculate-patients-st
 	touch .setup-cqf-ruler-r4
 
 .new-cqf-ruler:
+	docker pull contentgroup/cqf-ruler:develop
 	docker run --name cqf-ruler --rm -dit -p 8080:8080 contentgroup/cqf-ruler:develop
 	touch .new-cqf-ruler
 
@@ -23,7 +24,8 @@ connectathon:
 .wait-cqf-ruler:
 	until `curl --output /dev/null --silent --head --fail http://localhost:8080/cqf-ruler-r4`; do printf '.'; sleep 5; done
 
-.seed-measures-r4: .wait-cqf-ruler
+.seed-measures-r4:
+	make .wait-cqf-ruler
 	# CMS 104
 	curl -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM104-FHIR4-8.1.000 \
 		-H 'Content-Type: application/json' \
@@ -67,7 +69,8 @@ connectathon:
 	touch .seed-measures-r4
 
 
-.seed-vs-r4: .wait-cqf-ruler
+.seed-vs-r4:
+	make .wait-cqf-ruler
 	curl -X POST http://localhost:8080/cqf-ruler-r4/fhir \
 		-H 'Content-Type: application/json' \
 		-d @connectathon/fhir4/bundles/EXM104_FHIR4-8.1.000/EXM104_FHIR4-8.1.000-files/valuesets-EXM104_FHIR4-8.1.000-bundle.json
@@ -89,7 +92,8 @@ connectathon:
 	touch .seed-vs-r4
 
 
-.seed-measures-stu3: .wait-cqf-ruler
+.seed-measures-stu3:
+	make .wait-cqf-ruler
 	# EXM 104
 	curl -X POST http://localhost:8080/cqf-ruler-dstu3/fhir \
 		-H 'Content-Type: application/json' \
@@ -142,7 +146,8 @@ connectathon:
 		-d @connectathon/fhir3/bundles/EXM130_FHIR3-7.2.000/EXM130_FHIR3-7.2.000-files/measure-EXM130_FHIR3-7.2.000.json
 	touch .seed-measures-stu3
 	
-.seed-vs-stu3: .wait-cqf-ruler
+.seed-vs-stu3:
+	make .wait-cqf-ruler
 	until `curl --output /dev/null --silent --head --fail http://localhost:8080/cqf-ruler-dstu3`; do printf '.'; sleep 5; done
 	curl -X POST http://localhost:8080/cqf-ruler-dstu3/fhir \
 		-H 'Content-Type: application/json' \
@@ -201,4 +206,4 @@ clean:
 	-rm .seed-vs-stu3
 	-rm .seed-vs-r4
 
-.PHONY: all clean info
+.PHONY: all clean info .wait-cqf-ruler
