@@ -1,9 +1,11 @@
 output
 synthea
 connectathon
-.cqf-ruler
-.seed-cqf-ruler*
-.seed-cqf-ruler-no-vs*
+stu3
+r4
+.new-cqf-ruler
+.seed-measures*
+.seed-vs*
 .setup-cqf-ruler*
 *.csv
 .DS_Store
