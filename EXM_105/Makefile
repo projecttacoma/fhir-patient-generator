@@ -5,7 +5,7 @@ info:
 
 PATIENT_COUNT := 30
 generate-patients-stu3:
-	cd ../synthea && ./run_synthea -a 18-21 -p $(PATIENT_COUNT) -m stroke_exm_105
+	cd ../synthea && ./run_synthea --exporter.fhir.export=false --exporter.fhir_stu3.export=true -a 18-21 -p $(PATIENT_COUNT) -m stroke_exm_105
 
 calculate-patients-stu3:
 	mkdir -p stu3
