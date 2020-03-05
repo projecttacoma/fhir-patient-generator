@@ -22,8 +22,8 @@ generate-patients-r4:
 
 calculate-patients-stu3:
 	mkdir -p stu3
-	cd stu3 && calculate-bundles -d ../../synthea/output/fhir_stu3 -c ../../connectathon/fhir3/bundles/EXM124_FHIR3-7.2.000/EXM124_FHIR3-7.2.000-files/EXM124_FHIR3-7.2.000.cql -u http://localhost:8080/cqf-ruler-dstu3/fhir -m measure-EXM124-FHIR3-7.2.000
+	cd stu3 && calculate-bundles -d ../../synthea/output/fhir_stu3 -u http://localhost:8080/cqf-ruler-dstu3/fhir -m measure-EXM124-FHIR3-7.2.000
 
 calculate-patients-r4:
 	mkdir -p r4
-	cd r4 && calculate-bundles -d ../../synthea/output/fhir -c ../../connectathon/fhir4/bundles/EXM124_FHIR4-8.2.000/EXM124_FHIR4-8.2.000-files/EXM124_FHIR4-8.2.000.cql -u http://localhost:8080/cqf-ruler-r4/fhir -m measure-EXM124-FHIR4-8.2.000
+	cd r4 && calculate-bundles -d ../../synthea/output/fhir -u http://localhost:8080/cqf-ruler-r4/fhir -m measure-EXM124-FHIR4-8.2.000
