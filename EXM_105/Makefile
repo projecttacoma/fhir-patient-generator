@@ -26,4 +26,4 @@ calculate-patients-stu3:
 
 calculate-patients-r4:
 	mkdir -p r4
-	cd r4 && calculate-bundles -d ../../synthea/output/fhir -c ../../connectathon/fhir4/cql/EXM105_FHIR4-8.1.000.cql -u http://localhost:8080/cqf-ruler-r4/fhir -s "2019-01-01" -e "2019-12-31" -m measure-EXM105-FHIR4-8.1.000
+	cd r4 && calculate-bundles -d ../../synthea/output/fhir -u http://localhost:8080/cqf-ruler-r4/fhir --measure-id measure-EXM105-FHIR4-8.1.000
