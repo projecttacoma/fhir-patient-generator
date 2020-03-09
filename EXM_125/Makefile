@@ -6,19 +6,12 @@ info:
 	$(info `make` will perform patient generation and calculation.)
 
 PATIENT_COUNT := 10
-SYNTHEA_PROPS := ../synthea/src/main/resources/synthea.properties
 
 generate-patients-stu3:
-	sed 's/exporter.fhir.export = true/exporter.fhir.export = false/g' $(SYNTHEA_PROPS) > temp
-	sed 's/exporter.fhir_stu3.export = false/exporter.fhir_stu3.export = true/g' temp > $(SYNTHEA_PROPS)
-	rm -rf temp
-	cd ../synthea && ./run_synthea -a 52-52 -g F -p $(PATIENT_COUNT) -m EXM125*
+	cd ../synthea && ./run_synthea --exporter.fhir.export=false --exporter.fhir_stu3.export=true -a 52-52 -g F -p $(PATIENT_COUNT) -m EXM125*
 
 generate-patients-r4:
-	sed 's/exporter.fhir.export = false/exporter.fhir.export = true/g' $(SYNTHEA_PROPS) > temp
-	sed 's/exporter.fhir_stu3.export = true/exporter.fhir_stu3.export = false/g' temp > $(SYNTHEA_PROPS)
-	rm -rf temp
-	cd ../synthea && ./run_synthea -a 52-52 -g F -p $(PATIENT_COUNT) -m EXM125-r4*
+	cd ../synthea && ./run_synthea --exporter.fhir.export=true --exporter.fhir_stu3.export=false -a 52-52 -g F -p $(PATIENT_COUNT) -m EXM125-r4*
 
 calculate-patients-stu3:
 	mkdir -p stu3
