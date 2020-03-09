@@ -6,7 +6,6 @@ info:
 	$(info `make` will perform patient generation and calculation.)
 
 PATIENT_COUNT := 10
-SYNTHEA_PROPS := ../synthea/src/main/resources/synthea.properties
 
 generate-patients-stu3:
 	cd ../synthea && ./run_synthea --exporter.fhir.export=false --exporter.fhir_stu3.export=true -a 18-21 -p $(PATIENT_COUNT) -m stroke_exm_105*
