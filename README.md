@@ -20,6 +20,14 @@ A tool for generating eCQM-specific patient data using [Synthea&trade;](https://
 
 ## Developer Quickstart
 
+**NOTE**: This tool is only compatible with `fhir-bundle-calculator` version 3.0.0 or higher:
+
+``` bash
+npm install -g fhir-bundle-calculator
+calculate-bundles --version
+# should ouput 3.x.x
+```
+
 ### Installation
 
 ``` bash
