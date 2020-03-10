@@ -35,6 +35,16 @@ connectathon:
 		-d @connectathon/fhir4/bundles/EXM104_FHIR4-8.1.000/EXM104_FHIR4-8.1.000-files/library-EXM104_FHIR4-8.1.000.json
 	curl -X POST http://localhost:8080/cqf-ruler-r4/fhir \
 		-H 'Content-Type: application/json' \
+		-d @connectathon/fhir4/bundles/EXM104_FHIR4-8.1.000/EXM104_FHIR4-8.1.000-files/library-deps-EXM104_FHIR4-8.1.000-bundle.json
+	# CMS 105
+	curl -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM105-FHIR4-8.1.000 \
+		-H 'Content-Type: application/json' \
+		-d @connectathon/fhir4/bundles/EXM105_FHIR4-8.1.000/EXM105_FHIR4-8.1.000-files/measure-EXM105_FHIR4-8.1.000.json
+	curl -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Library/library-EXM105-FHIR4-8.1.000 \
+		-H 'Content-Type: application/json' \
+		-d @connectathon/fhir4/bundles/EXM105_FHIR4-8.1.000/EXM105_FHIR4-8.1.000-files/library-EXM105_FHIR4-8.1.000.json
+	curl -X POST http://localhost:8080/cqf-ruler-r4/fhir \
+		-H 'Content-Type: application/json' \
 		-d @connectathon/fhir4/bundles/EXM105_FHIR4-8.1.000/EXM105_FHIR4-8.1.000-files/library-deps-EXM105_FHIR4-8.1.000-bundle.json
 	# CMS 124
 	curl -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM124-FHIR4-8.2.000 \
@@ -74,6 +84,9 @@ connectathon:
 	curl -X POST http://localhost:8080/cqf-ruler-r4/fhir \
 		-H 'Content-Type: application/json' \
 		-d @connectathon/fhir4/bundles/EXM104_FHIR4-8.1.000/EXM104_FHIR4-8.1.000-files/valuesets-EXM104_FHIR4-8.1.000-bundle.json
+	curl -X POST http://localhost:8080/cqf-ruler-r4/fhir \
+		-H 'Content-Type: application/json' \
+		-d @connectathon/fhir4/bundles/EXM105_FHIR4-8.1.000/EXM105_FHIR4-8.1.000-files/valuesets-EXM105_FHIR4-8.1.000-bundle.json
 	curl -X POST http://localhost:8080/cqf-ruler-r4/fhir \
 		-H 'Content-Type: application/json' \
 		-d @connectathon/fhir4/bundles/EXM124_FHIR4-8.2.000/EXM124_FHIR4-8.2.000-files/valuesets-EXM124_FHIR4-8.2.000-bundle.json
