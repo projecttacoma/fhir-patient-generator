@@ -37,7 +37,7 @@ cd fhir-patient-generator
 
 ### Usage
 
-``` bash
+```
 make MEASURE_DIR=/path/to/measure/dir <r4|stu3>
 ```
 
@@ -80,7 +80,7 @@ We have published patient data for all supported measures in both `R4` and `STU3
 
 `fhir-patient-generator` also supports loading and tagging a Docker image with patient data for a specific measure, not including ValueSets. This image will be published to the [Tacoma Docker organization](https://hub.docker.com/r/tacoma/cqf-ruler-preloaded/tags)
 
-``` bash
+```
 make MEASURE_DIR=/path/to/measure/dir VERSION=x.y.z preload-<r4|stu3>
 ```
 
