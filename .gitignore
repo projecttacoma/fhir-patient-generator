@@ -9,3 +9,4 @@ r4
 .setup-cqf-ruler*
 *.csv
 .DS_Store
+synthea_output/
