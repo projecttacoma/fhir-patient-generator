@@ -1,6 +1,14 @@
-all r4: .setup-cqf-ruler-r4 synthea generate-patients-r4 calculate-patients-r4
-
+MEASURE_DIRS := $(shell ls -d EXM_*)
 export SYNTHEA_DIR := synthea_output/$(shell date +%Y-%m-%dT%H%M%S)
+
+r4: .setup-cqf-ruler-r4 synthea generate-patients-r4 calculate-patients-r4
+
+define gen_calc_pts
+	make -C $1 all;
+endef
+
+all: .setup-cqf-ruler-r4 synthea
+	$(foreach dir,$(MEASURE_DIRS),$(call gen_calc_pts,$(dir)))
 
 info:
 	$(info usage: `make MEASURE_DIR=/path/to/measure/dir VERSION=x.y.z)
