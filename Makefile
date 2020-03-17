@@ -5,8 +5,15 @@ define gen_calc_pts
 	make -C $1 all;
 endef
 
+define load_all_pts
+	./load-cqf-ruler.sh $1 FHIR_VERSION=r4;
+endef
+
 all: .setup-cqf-ruler-r4 synthea
 	$(foreach dir,$(MEASURE_DIRS),$(call gen_calc_pts,$(dir)))
+
+load-all: .new-cqf-ruler .wait-cqf-ruler
+	$(foreach dir,$(MEASURE_DIRS),$(call load_all_pts,$(dir)))
 
 r4: .setup-cqf-ruler-r4 synthea generate-patients-r4 calculate-patients-r4
 
