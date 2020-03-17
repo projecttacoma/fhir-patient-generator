@@ -1,5 +1,7 @@
 all r4: .setup-cqf-ruler-r4 synthea generate-patients-r4 calculate-patients-r4
 
+export SYNTHEA_DIR := synthea_output/$(shell date +%Y-%m-%dT%H%M%S)
+
 info:
 	$(info usage: `make MEASURE_DIR=/path/to/measure/dir VERSION=x.y.z)
 
@@ -211,6 +213,7 @@ preload-r4: clean .new-cqf-ruler connectathon .seed-measures-r4 .run-load-script
 clean:
 	-docker stop cqf-ruler
 	-rm -rf synthea/output
+	-rm -rf EXM_*/synthea_output
 	-rm .setup-cqf-ruler-stu3
 	-rm .setup-cqf-ruler-r4
 	-rm .new-cqf-ruler
