@@ -2,25 +2,31 @@ MEASURE_DIRS := $(shell ls -d EXM_*)
 export SYNTHEA_DIR := synthea_output/$(shell date +%Y-%m-%dT%H%M%S)
 
 define gen_calc_pts
-	make -C $1 all;
+	make -C $1 $2;
 endef
 
 define load_all_pts
-	./load-cqf-ruler.sh $1 FHIR_VERSION=r4;
+	./load-cqf-ruler.sh $1 FHIR_VERSION=$2;
 endef
-
-all: .setup-cqf-ruler-r4 synthea
-	$(foreach dir,$(MEASURE_DIRS),$(call gen_calc_pts,$(dir)))
-
-load-all: .new-cqf-ruler .wait-cqf-ruler
-	$(foreach dir,$(MEASURE_DIRS),$(call load_all_pts,$(dir)))
 
 r4: .setup-cqf-ruler-r4 synthea generate-patients-r4 calculate-patients-r4
 
+stu3: .setup-cqf-ruler-stu3 synthea generate-patients-stu3 calculate-patients-stu3
+
+all all-r4: .setup-cqf-ruler-r4 synthea
+	$(foreach dir,$(MEASURE_DIRS),$(call gen_calc_pts,$(dir),r4))
+
+all-stu3: .setup-cqf-ruler-stu3 synthea
+	$(foreach dir,$(MEASURE_DIRS),$(call gen_calc_pts,$(dir),stu3))
+
+preload-all preload-all-r4: clean .setup-cqf-ruler-r4 .wait-cqf-ruler
+	$(foreach dir,$(MEASURE_DIRS),$(call load_all_pts,$(dir),r4))
+
+preload-all-stu3: clean .setup-cqf-ruler-stu3 .wait-cqf-ruler
+	$(foreach dir,$(MEASURE_DIRS),$(call load_all_pts,$(dir),stu3))
+
 info:
 	$(info usage: `make MEASURE_DIR=/path/to/measure/dir VERSION=x.y.z)
-
-stu3: .setup-cqf-ruler-stu3 synthea generate-patients-stu3 calculate-patients-stu3
 
 .setup-cqf-ruler-stu3: .new-cqf-ruler connectathon .seed-measures-stu3 .seed-vs-stu3
 	touch .setup-cqf-ruler-stu3
