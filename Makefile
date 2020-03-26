@@ -48,8 +48,6 @@ connectathon:
 		$(info connectathon checks out a specific commit SHA in case filepaths are updated)
 		git clone https://github.com/DBCG/connectathon.git
 		cd connectathon && git checkout 52084217d33a9d9fc8d79664a535edb24557635b
-	else
-		cd ..
 	endif
 
 .wait-cqf-ruler:
@@ -58,7 +56,7 @@ connectathon:
 .seed-measures-r4:
 	make .wait-cqf-ruler
 	# CMS 104
-	ls
+	cd ..
 	curl -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM104-FHIR4-8.1.000 \
 		-H 'Content-Type: application/json' \
 		-d @$(BASE_DIR)fhir4/bundles/EXM104_FHIR4-8.1.000/EXM104_FHIR4-8.1.000-files/measure-EXM104_FHIR4-8.1.000.json
