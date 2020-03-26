@@ -1,5 +1,10 @@
 MEASURE_DIRS := $(shell ls -d EXM_*)
 export SYNTHEA_DIR := synthea_output/$(shell date +%Y-%m-%dT%H%M%S)
+ifeq ($(strip $(CI_TOOL)),) 
+	BASE_DIR := "connectathon"
+else
+	BASE_DIR := ".."
+endif
 
 define gen_calc_pts
 	make -C $1 $2;
@@ -43,9 +48,14 @@ info:
 	touch .new-cqf-ruler
 
 connectathon:
+        ifeq ($(strip $(CI_TOOL)),) 
+	export BASE_DIR="connectathon"
 	$(info connectathon checks out a specific commit SHA in case filepaths are updated)
 	git clone https://github.com/DBCG/connectathon.git
 	cd connectathon && git checkout 52084217d33a9d9fc8d79664a535edb24557635b
+        else
+	export BASE_DIR=".."
+        endif
 
 .wait-cqf-ruler:
 	until `curl --output /dev/null --silent --head --fail http://localhost:8080/cqf-ruler-r4`; do printf '.'; sleep 5; done
@@ -53,9 +63,10 @@ connectathon:
 .seed-measures-r4:
 	make .wait-cqf-ruler
 	# CMS 104
+	echo $(BASE_DIR)
 	curl -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM104-FHIR4-8.1.000 \
 		-H 'Content-Type: application/json' \
-		-d @connectathon/fhir4/bundles/EXM104_FHIR4-8.1.000/EXM104_FHIR4-8.1.000-files/measure-EXM104_FHIR4-8.1.000.json
+		-d @$(BASE_DIR)/fhir4/bundles/EXM104_FHIR4-8.1.000/EXM104_FHIR4-8.1.000-files/measure-EXM104_FHIR4-8.1.000.json
 	curl -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Library/library-EXM104-FHIR4-8.1.000 \
 		-H 'Content-Type: application/json' \
 		-d @connectathon/fhir4/bundles/EXM104_FHIR4-8.1.000/EXM104_FHIR4-8.1.000-files/library-EXM104_FHIR4-8.1.000.json
