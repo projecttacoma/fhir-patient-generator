@@ -49,7 +49,7 @@ connectathon:
 	git clone https://github.com/DBCG/connectathon.git
 	cd connectathon && git checkout 52084217d33a9d9fc8d79664a535edb24557635b
         else
-	cd ..
+	export BASE_DIR := "../"
         endif
 
 .wait-cqf-ruler:
