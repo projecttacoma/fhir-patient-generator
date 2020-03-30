@@ -1,5 +1,10 @@
 MEASURE_DIRS := $(shell ls -d EXM_*)
 export SYNTHEA_DIR := synthea_output/$(shell date +%Y-%m-%dT%H%M%S)
+ifeq ($(strip $(CI_TOOL)),) 
+	BASE_DIR := "connectathon"
+else
+	BASE_DIR := ".."
+endif
 
 define gen_calc_pts
 	make -C $1 $2;
