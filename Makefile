@@ -59,7 +59,7 @@ connectathon:
 	make .wait-cqf-ruler
 	# CMS 104
 	ls
-        cd ../fhir4
+	cd ../fhir4
 	ls
 	curl -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM104-FHIR4-8.1.000 \
 		-H 'Content-Type: application/json' \
