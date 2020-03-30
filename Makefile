@@ -58,9 +58,9 @@ connectathon:
 .seed-measures-r4:
 	make .wait-cqf-ruler
 	# CMS 104
-	cd .. && curl -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM104-FHIR4-8.1.000 \
+	curl -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM104-FHIR4-8.1.000 \
 		-H 'Content-Type: application/json' \
-		-d @fhir4/bundles/EXM104_FHIR4-8.1.000/EXM104_FHIR4-8.1.000-files/measure-EXM104_FHIR4-8.1.000.json
+		-d @../fhir4/bundles/EXM104_FHIR4-8.1.000/EXM104_FHIR4-8.1.000-files/measure-EXM104_FHIR4-8.1.000.json
 	curl -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Library/library-EXM104-FHIR4-8.1.000 \
 		-H 'Content-Type: application/json' \
 		-d @connectathon/fhir4/bundles/EXM104_FHIR4-8.1.000/EXM104_FHIR4-8.1.000-files/library-EXM104_FHIR4-8.1.000.json
