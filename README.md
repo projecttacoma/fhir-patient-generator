@@ -37,6 +37,14 @@ cd fhir-patient-generator
 
 ### Usage
 
+#### As a CI tool
+
+```
+make MEAUSRE_DIR/path/to/measure/dir <r4|stu3> CI_TOOL=true
+```
+
+#### Running Standalone
+
 ```
 make MEASURE_DIR=/path/to/measure/dir <r4|stu3>
 ```

@@ -1,9 +1,11 @@
 MEASURE_DIRS := $(shell ls -d EXM_*)
 export SYNTHEA_DIR := synthea_output/$(shell date +%Y-%m-%dT%H%M%S)
-ifeq ($(strip $(CI_TOOL)),) 
+BASE_DIR := ..
+ifeq ($(strip $(CI_TOOL)),)
 	BASE_DIR := connectathon
-else
-	BASE_DIR := ..
+endif
+ifeq ($(strip $(CI_TOOL)),false)
+	BASE_DIR := connectathon
 endif
 
 define gen_calc_pts
@@ -48,7 +50,7 @@ info:
 	touch .new-cqf-ruler
 
 connectathon:
-ifeq ($(strip $(CI_TOOL)),) 
+ifeq ($(BASE_DIR),connectathon)
 	$(info connectathon checks out a specific commit SHA in case filepaths are updated)
 	git clone https://github.com/DBCG/connectathon.git
 	cd connectathon && git checkout 52084217d33a9d9fc8d79664a535edb24557635b
