@@ -37,7 +37,7 @@ cd fhir-patient-generator
 
 ### Usage
 
-#### As a CI tool
+#### As a CI tool in the connectathon repository
 
 ```
 make MEAUSRE_DIR/path/to/measure/dir <r4|stu3> CI_TOOL=true
