@@ -48,11 +48,11 @@ info:
 	touch .new-cqf-ruler
 
 connectathon:
-        ifeq ($(strip $(CI_TOOL)),) 
+ifeq ($(strip $(CI_TOOL)),) 
 	$(info connectathon checks out a specific commit SHA in case filepaths are updated)
 	git clone https://github.com/DBCG/connectathon.git
 	cd connectathon && git checkout 52084217d33a9d9fc8d79664a535edb24557635b
-        endif
+endif
 
 .wait-cqf-ruler:
 	until `curl --output /dev/null --silent --head --fail http://localhost:8080/cqf-ruler-r4`; do printf '.'; sleep 5; done
