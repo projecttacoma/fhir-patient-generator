@@ -1,7 +1,7 @@
 MEASURE_DIRS := $(shell ls -d EXM_*)
 export SYNTHEA_DIR := synthea_output/$(shell date +%Y-%m-%dT%H%M%S)
 ifeq ($(strip $(CI_TOOL)),) 
-	BASE_DIR := "connectathon"
+	BASE_DIR := connectathon
 else
 	BASE_DIR := ".."
 endif
