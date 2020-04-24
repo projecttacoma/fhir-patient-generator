@@ -53,7 +53,7 @@ connectathon:
 ifeq ($(BASE_DIR),connectathon)
 	$(info connectathon checks out a specific commit SHA in case filepaths are updated)
 	git clone https://github.com/DBCG/connectathon.git
-	cd connectathon && git checkout 52084217d33a9d9fc8d79664a535edb24557635b
+	cd connectathon && git checkout 8fbaf58758a5d0719dd4b526f5018a5b33d8272e
 endif
 
 .wait-cqf-ruler:
@@ -111,6 +111,16 @@ endif
 	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X POST http://localhost:8080/cqf-ruler-r4/fhir/ \
 		-H 'Content-Type: application/json' \
 		-d @$(BASE_DIR)/fhir4/bundles/EXM130_FHIR4-7.2.000/EXM130_FHIR4-7.2.000-files/library-deps-EXM130_FHIR4-7.2.000-bundle.json
+	# CMS 506
+	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM506-FHIR4-2.0.000 \
+		-H 'Content-Type: application/json' \
+		-d @$(BASE_DIR)/fhir4/bundles/EXM506_FHIR4-2.0.000/EXM506_FHIR4-2.0.000-files/measure-EXM506_FHIR4-2.0.000.json
+	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Library/library-EXM506-FHIR4-2.0.000 \
+		-H 'Content-Type: application/json' \
+		-d @$(BASE_DIR)/fhir4/bundles/EXM506_FHIR4-2.0.000/EXM506_FHIR4-2.0.000-files/library-EXM506_FHIR4-2.0.000.json
+	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X POST http://localhost:8080/cqf-ruler-r4/fhir/ \
+		-H 'Content-Type: application/json' \
+		-d @$(BASE_DIR)/fhir4/bundles/EXM506_FHIR4-2.0.000/EXM506_FHIR4-2.0.000-files/library-deps-EXM506_FHIR4-2.0.000-bundle.json
 	touch .seed-measures-r4
 
 
@@ -133,10 +143,7 @@ endif
 		-d @$(BASE_DIR)/fhir4/bundles/EXM130_FHIR4-7.2.000/EXM130_FHIR4-7.2.000-files/valuesets-EXM130_FHIR4-7.2.000-bundle.json
 	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X POST http://localhost:8080/cqf-ruler-r4/fhir \
 		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir4/bundles/EXM124_FHIR4-8.2.000/EXM124_FHIR4-8.2.000-files/valuesets-EXM124_FHIR4-8.2.000-bundle.json
-	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X POST http://localhost:8080/cqf-ruler-r4/fhir \
-		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir4/bundles/EXM124_FHIR4-8.2.000/EXM124_FHIR4-8.2.000-files/valuesets-EXM124_FHIR4-8.2.000-bundle.json
+		-d @$(BASE_DIR)/fhir4/bundles/EXM506_FHIR4-2.0.000/EXM506_FHIR4-2.0.000-files/valuesets-EXM506_FHIR4-2.0.000-bundle.json
 	touch .seed-vs-r4
 
 
