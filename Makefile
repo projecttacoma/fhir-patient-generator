@@ -16,7 +16,7 @@ define load_all_pts
 	./load-cqf-ruler.sh $1 FHIR_VERSION=$2;
 endef
 
-r4: .check-dependencies .setup-cqf-ruler-r4 synthea generate-patients-r4 calculate-patients-r4
+r4: .check-dependencies .setup-cqf-ruler-r4 synthea .copy-valuesets generate-patients-r4 calculate-patients-r4
 
 stu3: .check-dependencies .setup-cqf-ruler-stu3 synthea generate-patients-stu3 calculate-patients-stu3
 
@@ -55,6 +55,11 @@ ifeq ($(BASE_DIR),connectathon)
 	git clone https://github.com/DBCG/connectathon.git
 	cd connectathon && git checkout 8fbaf58758a5d0719dd4b526f5018a5b33d8272e
 endif
+
+VALUESET_FILES = $(shell find $(BASE_DIR)/fhir4/bundles -type f -name "valuesets*bundle.json")
+.copy-valuesets:
+	cp $(VALUESET_FILES) synthea/src/main/resources/terminology
+	touch .copy-valuesets
 
 .wait-cqf-ruler:
 	until `curl --output /dev/null --silent --head --fail http://localhost:8080/cqf-ruler-r4`; do printf '.'; sleep 5; done
@@ -261,5 +266,6 @@ clean:
 	-rm .seed-measures-r4
 	-rm .seed-vs-stu3
 	-rm .seed-vs-r4
+	-rm .copy-valuesets
 
 .PHONY: all clean info .wait-cqf-ruler

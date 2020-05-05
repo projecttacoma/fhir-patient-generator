@@ -10,3 +10,4 @@ r4
 *.csv
 .DS_Store
 synthea_output/
+.copy-valuesets
