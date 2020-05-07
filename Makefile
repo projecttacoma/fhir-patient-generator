@@ -57,7 +57,7 @@ ifeq ($(BASE_DIR),connectathon)
 endif
 
 VALUESET_FILES = $(shell find $(BASE_DIR)/fhir4/bundles -type f -name "valuesets*bundle.json")
-.copy-valuesets:
+.copy-valuesets: connectathon synthea
 	cp $(VALUESET_FILES) synthea/src/main/resources/terminology
 	touch .copy-valuesets
 
