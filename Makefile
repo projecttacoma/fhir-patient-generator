@@ -67,65 +67,65 @@ VALUESET_FILES = $(shell find $(BASE_DIR)/fhir401/bundles -type f -name "valuese
 .seed-measures-r4:
 	make .wait-cqf-ruler
 	# CMS 104
-	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM104-FHIR4-9.1.000 \
+	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM104-9.1.000 \
 		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir401/bundles/EXM104_FHIR4-9.1.000/EXM104_FHIR4-9.1.000-files/measure-EXM104_FHIR4-9.1.000.json
-	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Library/library-EXM104-FHIR4-9.1.000 \
+		-d @$(BASE_DIR)/fhir401/bundles/EXM104-9.1.000/EXM104-9.1.000-files/measure-EXM104-9.1.000.json
+	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Library/library-EXM104-9.1.000 \
 		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir401/bundles/EXM104_FHIR4-9.1.000/EXM104_FHIR4-9.1.000-files/library-EXM104_FHIR4-9.1.000.json
+		-d @$(BASE_DIR)/fhir401/bundles/EXM104-9.1.000/EXM104-9.1.000-files/library-EXM104-9.1.000.json
 	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X POST http://localhost:8080/cqf-ruler-r4/fhir \
 		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir401/bundles/EXM104_FHIR4-9.1.000/EXM104_FHIR4-9.1.000-files/library-deps-EXM104_FHIR4-9.1.000-bundle.json
+		-d @$(BASE_DIR)/fhir401/bundles/EXM104-9.1.000/EXM104-9.1.000-files/library-deps-EXM104-9.1.000-bundle.json
 	# CMS 105
-	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM105-FHIR4-9.1.000 \
+	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM105-9.1.000 \
 		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir401/bundles/EXM105_FHIR4-9.1.000/EXM105_FHIR4-9.1.000-files/measure-EXM105_FHIR4-9.1.000.json
-	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Library/library-EXM105-FHIR4-9.1.000 \
+		-d @$(BASE_DIR)/fhir401/bundles/EXM105-9.1.000/EXM105-9.1.000-files/measure-EXM105-9.1.000.json
+	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Library/library-EXM105-9.1.000 \
 		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir401/bundles/EXM105_FHIR4-9.1.000/EXM105_FHIR4-9.1.000-files/library-EXM105_FHIR4-9.1.000.json
+		-d @$(BASE_DIR)/fhir401/bundles/EXM105-9.1.000/EXM105-9.1.000-files/library-EXM105-9.1.000.json
 	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X POST http://localhost:8080/cqf-ruler-r4/fhir \
 		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir401/bundles/EXM105_FHIR4-9.1.000/EXM105_FHIR4-9.1.000-files/library-deps-EXM105_FHIR4-9.1.000-bundle.json
+		-d @$(BASE_DIR)/fhir401/bundles/EXM105-9.1.000/EXM105-9.1.000-files/library-deps-EXM105-9.1.000-bundle.json
 	# CMS 124
-	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM124-FHIR4-9.0.000 \
+	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM124-9.0.000 \
 		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir401/bundles/EXM124_FHIR4-9.0.000/EXM124_FHIR4-9.0.000-files/measure-EXM124_FHIR4-9.0.000.json
+		-d @$(BASE_DIR)/fhir401/bundles/EXM124-9.0.000/EXM124-9.0.000-files/measure-EXM124-9.0.000.json
 	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X POST http://localhost:8080/cqf-ruler-r4/fhir \
 		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir401/bundles/EXM124_FHIR4-9.0.000/EXM124_FHIR4-9.0.000-files/library-deps-EXM124_FHIR4-9.0.000-bundle.json
-	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Library/library-EXM124-FHIR4-9.0.000 \
+		-d @$(BASE_DIR)/fhir401/bundles/EXM124-9.0.000/EXM124-9.0.000-files/library-deps-EXM124-9.0.000-bundle.json
+	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Library/library-EXM124-9.0.000 \
   		-H 'Content-Type: application/json' \
-		-d @./$(BASE_DIR)/fhir401/bundles/EXM124_FHIR4-9.0.000/EXM124_FHIR4-9.0.000-files/library-EXM124_FHIR4-9.0.000.json
+		-d @./$(BASE_DIR)/fhir401/bundles/EXM124-9.0.000/EXM124-9.0.000-files/library-EXM124-9.0.000.json
 	# CMS 125
-	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM125-FHIR4-8.0.000 \
+	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM125-8.0.000 \
 		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir401/bundles/EXM125_FHIR4-8.0.000/EXM125_FHIR4-8.0.000-files/measure-EXM125_FHIR4-8.0.000.json
+		-d @$(BASE_DIR)/fhir401/bundles/EXM125-8.0.000/EXM125-8.0.000-files/measure-EXM125-8.0.000.json
 	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X POST http://localhost:8080/cqf-ruler-r4/fhir \
 		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir401/bundles/EXM125_FHIR4-8.0.000/EXM125_FHIR4-8.0.000-files/library-deps-EXM125_FHIR4-8.0.000-bundle.json
-	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Library/library-EXM125-FHIR4-8.0.000 \
+		-d @$(BASE_DIR)/fhir401/bundles/EXM125-8.0.000/EXM125-8.0.000-files/library-deps-EXM125-8.0.000-bundle.json
+	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Library/library-EXM125-8.0.000 \
 		-H 'Content-Type: application/json' \
-		-d @./$(BASE_DIR)/fhir401/bundles/EXM125_FHIR4-8.0.000/EXM125_FHIR4-8.0.000-files/library-EXM125_FHIR4-8.0.000.json
+		-d @./$(BASE_DIR)/fhir401/bundles/EXM125-8.0.000/EXM125-8.0.000-files/library-EXM125-8.0.000.json
 	# CMS 130
-	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM130-FHIR4-8.0.000 \
+	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM130-8.0.000 \
 		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir401/bundles/EXM130_FHIR4-8.0.000/EXM130_FHIR4-8.0.000-files/measure-EXM130_FHIR4-8.0.000.json
-	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Library/library-EXM130-FHIR4-8.0.000 \
+		-d @$(BASE_DIR)/fhir401/bundles/EXM130-8.0.000/EXM130-8.0.000-files/measure-EXM130-8.0.000.json
+	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Library/library-EXM130-8.0.000 \
 		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir401/bundles/EXM130_FHIR4-8.0.000/EXM130_FHIR4-8.0.000-files/library-EXM130_FHIR4-8.0.000.json 
+		-d @$(BASE_DIR)/fhir401/bundles/EXM130-8.0.000/EXM130-8.0.000-files/library-EXM130-8.0.000.json 
 	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X POST http://localhost:8080/cqf-ruler-r4/fhir/ \
 		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir401/bundles/EXM130_FHIR4-8.0.000/EXM130_FHIR4-8.0.000-files/library-deps-EXM130_FHIR4-8.0.000-bundle.json
+		-d @$(BASE_DIR)/fhir401/bundles/EXM130-8.0.000/EXM130-8.0.000-files/library-deps-EXM130-8.0.000-bundle.json
 	# CMS 506
-	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM506-FHIR4-3.0.000 \
+	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Measure/measure-EXM506-3.0.000 \
 		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir401/bundles/EXM506_FHIR4-2.0.000/EXM506_FHIR4-2.0.000-files/measure-EXM506_FHIR4-2.0.000.json
-	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Library/library-EXM506-FHIR4-3.0.000 \
+		-d @$(BASE_DIR)/fhir401/bundles/EXM506-3.0.000/EXM506-3.0.000-files/measure-EXM506-3.0.000.json
+	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X PUT http://localhost:8080/cqf-ruler-r4/fhir/Library/library-EXM506-3.0.000 \
 		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir401/bundles/EXM506_FHIR4-2.0.000/EXM506_FHIR4-2.0.000-files/library-EXM506_FHIR4-2.0.000.json
+		-d @$(BASE_DIR)/fhir401/bundles/EXM506-3.0.000/EXM506-3.0.000-files/library-EXM506-3.0.000.json
 	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X POST http://localhost:8080/cqf-ruler-r4/fhir/ \
 		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir401/bundles/EXM506_FHIR4-2.0.000/EXM506_FHIR4-2.0.000-files/library-deps-EXM506_FHIR4-2.0.000-bundle.json
+		-d @$(BASE_DIR)/fhir401/bundles/EXM506-3.0.000/EXM506-3.0.000-files/library-deps-EXM506-3.0.000-bundle.json
 	touch .seed-measures-r4
 
 
@@ -133,22 +133,22 @@ VALUESET_FILES = $(shell find $(BASE_DIR)/fhir401/bundles -type f -name "valuese
 	make .wait-cqf-ruler
 	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X POST http://localhost:8080/cqf-ruler-r4/fhir \
 		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir401/bundles/EXM104_FHIR4-9.1.000/EXM104_FHIR4-9.1.000-files/valuesets-EXM104_FHIR4-9.1.000-bundle.json
+		-d @$(BASE_DIR)/fhir401/bundles/EXM104-9.1.000/EXM104-9.1.000-files/valuesets-EXM104-9.1.000-bundle.json
 	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X POST http://localhost:8080/cqf-ruler-r4/fhir \
 		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir401/bundles/EXM105_FHIR4-9.1.000/EXM105_FHIR4-9.1.000-files/valuesets-EXM105_FHIR4-9.1.000-bundle.json
+		-d @$(BASE_DIR)/fhir401/bundles/EXM105-9.1.000/EXM105-9.1.000-files/valuesets-EXM105-9.1.000-bundle.json
 	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X POST http://localhost:8080/cqf-ruler-r4/fhir \
 		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir401/bundles/EXM124_FHIR4-9.0.000/EXM124_FHIR4-9.0.000-files/valuesets-EXM124_FHIR4-9.0.000-bundle.json
+		-d @$(BASE_DIR)/fhir401/bundles/EXM124-9.0.000/EXM124-9.0.000-files/valuesets-EXM124-9.0.000-bundle.json
 	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X POST http://localhost:8080/cqf-ruler-r4/fhir \
 		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir401/bundles/EXM125_FHIR4-8.0.000/EXM125_FHIR4-8.0.000-files/valuesets-EXM125_FHIR4-8.0.000-bundle.json
+		-d @$(BASE_DIR)/fhir401/bundles/EXM125-8.0.000/EXM125-8.0.000-files/valuesets-EXM125-8.0.000-bundle.json
 	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X POST http://localhost:8080/cqf-ruler-r4/fhir \
 		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir401/bundles/EXM130_FHIR4-8.0.000/EXM130_FHIR4-8.0.000-files/valuesets-EXM130_FHIR4-8.0.000-bundle.json
+		-d @$(BASE_DIR)/fhir401/bundles/EXM130-8.0.000/EXM130-8.0.000-files/valuesets-EXM130-8.0.000-bundle.json
 	curl -s -o /dev/null -w "Response Code: %{http_code}\n" -X POST http://localhost:8080/cqf-ruler-r4/fhir \
 		-H 'Content-Type: application/json' \
-		-d @$(BASE_DIR)/fhir401/bundles/EXM506_FHIR4-2.0.000/EXM506_FHIR4-2.0.000-files/valuesets-EXM506_FHIR4-2.0.000-bundle.json
+		-d @$(BASE_DIR)/fhir401/bundles/EXM506-3.0.000/EXM506-3.0.000-files/valuesets-EXM506-3.0.000-bundle.json
 	touch .seed-vs-r4
 
 
