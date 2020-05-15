@@ -53,7 +53,7 @@ connectathon:
 ifeq ($(BASE_DIR),connectathon)
 	$(info connectathon checks out a specific commit SHA in case filepaths are updated)
 	git clone https://github.com/DBCG/connectathon.git
-	cd connectathon && git checkout 77e61250343f46fec3903a7b19bc9d33bf921bd3
+	cd connectathon && git checkout c9c3dd163613f20142aa008da3a16b10d7e6d2ed
 endif
 
 VALUESET_FILES = $(shell find $(BASE_DIR)/fhir401/bundles -type f -name "valuesets*bundle.json")
