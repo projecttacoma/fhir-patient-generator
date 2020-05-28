@@ -11,7 +11,7 @@ generate-patients-stu3:
 	cd ../synthea && ./run_synthea --exporter.fhir.export=false --exporter.fhir_stu3.export=true --exporter.baseDirectory=../EXM_130/$(SYNTHEA_DIR)/ -a 51-51 -p $(PATIENT_COUNT) -m EXM130*
 
 generate-patients-r4:
-	cd ../synthea && ./run_synthea --exporter.fhir.export=true --exporter.fhir_stu3.export=false --exporter.baseDirectory=../EXM_130/$(SYNTHEA_DIR)/ -a 51-51 -p $(PATIENT_COUNT) -m EXM130-r4*
+	cd ../synthea && ./run_synthea --exporter.fhir.export=true --exporter.fhir_stu3.export=false --exporter.baseDirectory=../EXM_130/$(SYNTHEA_DIR)/ -a 51-61 --exporter.years_of_history=11 -p $(PATIENT_COUNT) -m EXM130-r4*
 
 calculate-patients-stu3:
 	mkdir -p stu3
@@ -19,4 +19,4 @@ calculate-patients-stu3:
 
 calculate-patients-r4:
 	mkdir -p r4
-	cd r4 && calculate-bundles -d ../$(SYNTHEA_DIR)/fhir -u http://localhost:8080/cqf-ruler-r4/fhir -m measure-EXM130-FHIR4-7.2.000
+	cd r4 && calculate-bundles -d ../$(SYNTHEA_DIR)/fhir -u http://localhost:8080/cqf-ruler-r4/fhir -m measure-EXM130-8.0.000
