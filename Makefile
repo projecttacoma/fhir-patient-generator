@@ -36,7 +36,7 @@ info:
 	$(info usage: `make MEASURE_DIR=/path/to/measure/dir VERSION=x.y.z)
 
 .check-dependencies:
-	npm install -g fhir-bundle-calculator
+	#npm install -g fhir-bundle-calculator
 
 .setup-cqf-ruler-stu3: .new-cqf-ruler connectathon .seed-measures-stu3 .seed-vs-stu3
 	touch .setup-cqf-ruler-stu3
@@ -227,7 +227,7 @@ VALUESET_FILES = $(shell find $(BASE_DIR)/fhir401/bundles -type f -name "valuese
 	touch .seed-vs-stu3
 
 synthea:
-	git clone --single-branch --branch abacus https://github.com/projecttacoma/synthea.git
+	git clone --single-branch --branch abacus-config-attributes https://github.com/projecttacoma/synthea.git
 
 PATIENT_COUNT := 10
 generate-patients-stu3:
