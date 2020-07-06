@@ -227,7 +227,7 @@ VALUESET_FILES = $(shell find $(BASE_DIR)/fhir401/bundles -type f -name "valuese
 	touch .seed-vs-stu3
 
 synthea:
-	git clone --single-branch --branch abacus-config-attributes https://github.com/projecttacoma/synthea.git
+	git clone --single-branch --branch measurement-period-config https://github.com/projecttacoma/synthea.git
 
 PATIENT_COUNT := 10
 generate-patients-stu3:
