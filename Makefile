@@ -227,7 +227,7 @@ VALUESET_FILES = $(shell find $(BASE_DIR)/fhir401/bundles -type f -name "valuese
 	touch .seed-vs-stu3
 
 synthea:
-	git clone --single-branch --branch measurement-period-config https://github.com/projecttacoma/synthea.git
+	git clone --single-branch --branch abacus https://github.com/projecttacoma/synthea.git
 
 PATIENT_COUNT := 10
 generate-patients-stu3:
@@ -257,7 +257,7 @@ preload-r4: clean .new-cqf-ruler connectathon .seed-measures-r4 .run-load-script
 
 clean:
 	-docker stop cqf-ruler
-	-rm -rf synthea/output
+	-rm -rf synthea
 	-rm -rf EXM_*/synthea_output
 	-rm .setup-cqf-ruler-stu3
 	-rm .setup-cqf-ruler-r4
