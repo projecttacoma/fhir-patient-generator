@@ -40,7 +40,7 @@ cd fhir-patient-generator
 #### As a CI tool in the connectathon repository
 
 ```
-make MEAUSRE_DIR/path/to/measure/dir <r4|stu3> CI_TOOL=true
+make MEASURE_DIR/path/to/measure/dir <r4|stu3> CI_TOOL=true
 ```
 
 #### Running Standalone
@@ -51,11 +51,11 @@ make MEASURE_DIR=/path/to/measure/dir <r4|stu3>
 
 `MEASURE_DIR` is the relative path to the directory in `fhir-patient-generator` for the desired measure. Currently supported measures:
 
-* EXM_104
-* EXM_105
-* EXM_124
-* EXM_125
-* EXM_130
+* EXM_104-9.1.000
+* EXM_105-9.1.000
+* EXM_124-9.0.000
+* EXM_125-8.0.000
+* EXM_130-8.0.000
 
 #### Examples
 
