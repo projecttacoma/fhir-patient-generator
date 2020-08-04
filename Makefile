@@ -36,7 +36,7 @@ info:
 	$(info usage: `make MEASURE_DIR=/path/to/measure/dir VERSION=x.y.z)
 
 .check-dependencies:
-	#npm install -g fhir-bundle-calculator
+	npm install -g fhir-bundle-calculator
 
 .setup-cqf-ruler-stu3: .new-cqf-ruler connectathon .seed-measures-stu3 .seed-vs-stu3
 	touch .setup-cqf-ruler-stu3
