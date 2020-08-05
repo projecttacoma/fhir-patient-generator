@@ -10,7 +10,7 @@ MP_START := 2020-01-01
 MP_END := 2020-12-31
 
 generate-patients-r4:
-	cd ../synthea && ./run_synthea --exporter.fhir.export=true --exporter.fhir_stu3.export=false --exporter.baseDirectory=../EXM_506/$(SYNTHEA_DIR)/ -p $(PATIENT_COUNT) --ecqm.measurementPeriodStart=$(MP_START)T00:00:00Z -m EXM506-r4
+	cd ../synthea && ./run_synthea --exporter.fhir.export=true --exporter.fhir_stu3.export=false --exporter.baseDirectory=../EXM_506-3.0.000/$(SYNTHEA_DIR)/ -p $(PATIENT_COUNT) --ecqm.measurementPeriodStart=$(MP_START)T00:00:00Z -m EXM506-r4
 
 calculate-patients-r4:
 	mkdir -p r4

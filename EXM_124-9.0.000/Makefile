@@ -10,10 +10,10 @@ MP_START := 2020-01-01
 MP_END := 2020-12-31
 
 generate-patients-stu3:
-	cd ../synthea && ./run_synthea --exporter.fhir.export=false --exporter.fhir_stu3.export=true --exporter.baseDirectory=../EXM_124/$(SYNTHEA_DIR)/ --ecqm.measurementPeriodStart=$(MP_START)T00:00:00Z -a 52-52 -g F -p $(PATIENT_COUNT) -m breast_cancer_exm124*
+	cd ../synthea && ./run_synthea --exporter.fhir.export=false --exporter.fhir_stu3.export=true --exporter.baseDirectory=../EXM_124-9.0.000/$(SYNTHEA_DIR)/ --ecqm.measurementPeriodStart=$(MP_START)T00:00:00Z -a 52-52 -g F -p $(PATIENT_COUNT) -m breast_cancer_exm124*
 
 generate-patients-r4:
-	cd ../synthea && ./run_synthea --exporter.fhir.export=true --exporter.fhir_stu3.export=false --exporter.baseDirectory=../EXM_124/$(SYNTHEA_DIR)/ --ecqm.measurementPeriodStart=$(MP_START)T00:00:00Z -a 52-52 -g F -p $(PATIENT_COUNT) -m breast_cancer_exm124-r4*
+	cd ../synthea && ./run_synthea --exporter.fhir.export=true --exporter.fhir_stu3.export=false --exporter.baseDirectory=../EXM_124-9.0.000/$(SYNTHEA_DIR)/ --ecqm.measurementPeriodStart=$(MP_START)T00:00:00Z -a 52-52 -g F -p $(PATIENT_COUNT) -m breast_cancer_exm124-r4*
 
 calculate-patients-stu3:
 	mkdir -p stu3
