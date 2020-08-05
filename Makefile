@@ -257,7 +257,7 @@ preload-r4: clean .new-cqf-ruler connectathon .seed-measures-r4 .run-load-script
 
 clean:
 	-docker stop cqf-ruler
-	-rm -rf synthea/output
+	-rm -rf synthea
 	-rm -rf EXM_*/synthea_output
 	-rm .setup-cqf-ruler-stu3
 	-rm .setup-cqf-ruler-r4
