@@ -12,4 +12,4 @@ generate-patients-r4:
 
 calculate-patients-r4:
 	mkdir -p r4
-	cd r4 && node /Users/mgramigna/Projects/fhir-bundle-calculator/src/cli.js -d ../$(SYNTHEA_DIR)/fhir -u http://localhost:8080/cqf-ruler-r4/fhir -m measure-EXM111-9.1.000 -s $(MP_START) -e $(MP_END)
+	cd r4 && calculate-bundles -d ../$(SYNTHEA_DIR)/fhir -u http://localhost:8080/cqf-ruler-r4/fhir -m measure-EXM111-9.1.000 -s $(MP_START) -e $(MP_END)
