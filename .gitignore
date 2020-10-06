@@ -11,3 +11,5 @@ r4
 .DS_Store
 synthea_output/
 .copy-valuesets
+debug/
+node_modules/
