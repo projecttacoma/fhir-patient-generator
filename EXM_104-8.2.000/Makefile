@@ -6,8 +6,8 @@ info:
 	$(info `make` will perform patient generation and calculation.)
 
 PATIENT_COUNT := 10
-MP_START := 2020-01-01
-MP_END := 2020-12-31
+MP_START := 2019-01-01
+MP_END := 2019-12-31
 
 generate-patients-stu3:
 	cd ../synthea && ./run_synthea --exporter.fhir.export=false --exporter.fhir_stu3.export=true --exporter.baseDirectory=../EXM_104-8.2.000/$(SYNTHEA_DIR)/ -a 18-21 -p $(PATIENT_COUNT) -m stroke_exm_104*
