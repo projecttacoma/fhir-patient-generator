@@ -9,18 +9,11 @@ fi
 cd $1
 
 BASE_URL="http://localhost:8080/cqf-ruler-r4/fhir"
-
-if [ $FHIR_VERSION == "stu3" ]
-then
-    BASE_URL="http://localhost:8080/cqf-ruler-dstu3/fhir"
-    OUTPUT_DIR="stu3"
-else
-    OUTPUT_DIR="r4"
-fi
+OUTPUT_DIR="patients-r4"
 
 # In the event that there are multiple results output folders,
 # just use the most recent one
-OUTPUT_DIR="$OUTPUT_DIR/output/$(ls -t $OUTPUT_DIR/output | head -1)"
+# OUTPUT_DIR="$OUTPUT_DIR/output/$(ls -t $OUTPUT_DIR/output | head -1)"
 echo "Using directory $OUTPUT_DIR"
 
 check_success() {
@@ -31,7 +24,7 @@ check_success() {
   fi
 }
 
-curl -s -o /dev/null -w "%{http_code}\n" -X POST -H "Content-Type: application/json" --data @$OUTPUT_DIR/measure-report.json "$BASE_URL/MeasureReport"
+curl -s -o /dev/null -w "%{http_code}\n" -X POST -H "Content-Type: application/json" --data @$OUTPUT_DIR/population-measure-report.json "$BASE_URL/MeasureReport"
 check_success
 
 echo 'Posting ipop patients for:' "$OUTPUT_DIR"

@@ -7,7 +7,7 @@ then
 fi
 
 # 1 if grep found a match (no ValueSets), 0 otherwise
-VSET_SEARCH_MATCH=`curl -s http://localhost:8080/cqf-ruler-dstu3/fhir/ValueSet | grep -wc "\"total\":\s0"`
+VSET_SEARCH_MATCH=`curl -s http://localhost:8080/cqf-ruler-r4/fhir/ValueSet | grep -wc "\"total\":\s0"`
 if [ $VSET_SEARCH_MATCH -eq 1 ]
 then
     docker tag `docker commit cqf-ruler` tacoma/cqf-ruler-preloaded:$1
