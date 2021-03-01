@@ -16,7 +16,7 @@ ifeq ($(strip $(CALC_TYPE)),http)
 endif
 
 generate-patients:
-	cd ../synthea && ./run_synthea --exporter.fhir.export=true --exporter.fhir_stu3.export=false --exporter.baseDirectory=../EXM_125-7.3.000/$(SYNTHEA_DIR)/ --ecqm.measurementPeriodStart=$(MP_START)T00:00:00Z -a 53-55 -g F -p $(PATIENT_COUNT) -m EXM125-r4*
+	cd ../synthea && ./run_synthea --exporter.fhir.export=true --exporter.fhir_stu3.export=false --exporter.baseDirectory=../EXM_125-7.3.000/$(SYNTHEA_DIR)/ --ecqm.measurementPeriodStart=$(MP_START)T00:00:00Z -a 53-55 -g F -p $(PATIENT_COUNT) -m EXM125*
 
 calculate-patients:
 	mkdir -p r4
