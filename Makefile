@@ -173,7 +173,6 @@ preload: clean .new-cqf-ruler connectathon .seed-measures .run-load-script
 
 clean:
 	-docker stop cqf-ruler
-	-rm -rf synthea
 	-rm -rf EXM_*/synthea_output
 	-rm .setup-cqf-ruler-stu3
 	-rm .setup-cqf-ruler-r4
@@ -186,5 +185,9 @@ clean:
 	-rm .seed-vs-r4
 	-rm .seed-vs
 	-rm .copy-valuesets
+
+deep-clean: clean
+	-rm -rf synthea
+	-rm -rf connectathon
 
 .PHONY: all clean info .wait-cqf-ruler
