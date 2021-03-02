@@ -20,12 +20,12 @@ A tool for generating eCQM-specific patient data using [Synthea&trade;](https://
 
 ## Developer Quickstart
 
-**NOTE**: This tool is only compatible with `fhir-bundle-calculator` version 3.0.0 or higher:
+**NOTE**: This tool is only compatible with `fhir-bundle-calculator` version 4.0.0 or higher:
 
 ``` bash
 npm install -g fhir-bundle-calculator
 calculate-bundles --version
-# should ouput 3.x.x
+# should ouput 4.x.x
 ```
 
 ### Installation
@@ -40,13 +40,13 @@ cd fhir-patient-generator
 #### As a CI tool in the connectathon repository
 
 ```
-make MEAUSRE_DIR/path/to/measure/dir <r4|stu3> CI_TOOL=true
+make MEAUSRE_DIR/path/to/measure/dir CI_TOOL=true
 ```
 
 #### Running Standalone
 
 ```
-make MEASURE_DIR=/path/to/measure/dir <r4|stu3>
+make MEASURE_DIR=/path/to/measure/dir CALC_TYPE=<fqm|http> PATIENT_COUNT=10
 ```
 
 `MEASURE_DIR` is the relative path to the directory in `fhir-patient-generator` for the desired measure. Currently supported measures:
@@ -57,14 +57,15 @@ make MEASURE_DIR=/path/to/measure/dir <r4|stu3>
 * EXM_125
 * EXM_130
 
+`CALC_TYPE` tells `fhir-bundle-calculator` which engine to use for measure calculation. The default is `fqm-execution`, which is also what will be used if `CALC_TYPE=fqm` is specified. To use `cqf-ruler` instead, specify `CALC_TYPE=http` after the `make` command.
+
+`PATIENT_COUNT` specifies the number of (live) Synthea patients to generate for each measure. Actual patient counts will vary because Synthea doesn't count dead patients during generation.
+
 #### Examples
 
 ``` bash
 # Generate R4 patient data for EXM130
-make MEASURE_DIR=EXM_130 r4
-
-# Generate stu3 patient data for EXM130
-make MEASURE_DIR=EXM_130 stu3
+make MEASURE_DIR=EXM_130
 ```
 
 ## Generation and Calculation
@@ -75,6 +76,7 @@ The `Makefile` in `fhir-patient-generator` consolidates the following dependenci
 * [cqf-ruler](https://github.com/DBCG/cqf-ruler): Used for running calculation and getting MeasureReport resources
 * [Connectathon repository](https://github.com/DBCG/connectathon): Used for loading cqf-ruler with needed ValueSet, Library, and Measure resources
 * [fhir-bundle-calculator](https://github.com/projecttacoma/fhir-bundle-calculator): Command line utility for requesting and interpreting calculation results
+* [fqm-execution](https://github.com/projecttacoma/fqm-execution): Command line utility/Typescript library for calculating FHIR-based eCQMs against FHIR-based patients
 
 The following diagram depicts the operations that each utility is responsible for and the order in which they are executed:
 
@@ -89,7 +91,7 @@ We have published patient data for all supported measures in both `R4` and `STU3
 `fhir-patient-generator` also supports loading and tagging a Docker image with patient data for a specific measure, not including ValueSets. This image will be published to the [Tacoma Docker organization](https://hub.docker.com/r/tacoma/cqf-ruler-preloaded/tags)
 
 ```
-make MEASURE_DIR=/path/to/measure/dir VERSION=x.y.z preload-<r4|stu3>
+make MEASURE_DIR=/path/to/measure/dir VERSION=x.y.z preload
 ```
 
 This command will tag and push `tacoma/cqf-ruler-preloaded:x.y.z` to Dockerhub.
@@ -98,8 +100,5 @@ This command will tag and push `tacoma/cqf-ruler-preloaded:x.y.z` to Dockerhub.
 
 ``` bash
 # Publish preloaded image with EXM130 R4 data under tag 1.0.0
-make MEASURE_DIR=EXM_130 VERSION=1.0.0 preload-r4
-
-# Publish preloaded image with EXM130 STU3 data under tag 1.0.0
-make MEASURE_DIR=EXM_130 VERSION=1.0.0 preload-stu3
+make MEASURE_DIR=EXM_130 VERSION=1.0.0 preload
 ```
