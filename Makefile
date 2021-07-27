@@ -34,8 +34,8 @@ info:
 	touch .setup-cqf-ruler
 
 .new-cqf-ruler:
-	docker pull contentgroup/cqf-ruler:develop
-	docker run --name cqf-ruler --rm -dit -p 8080:8080 contentgroup/cqf-ruler:develop
+	docker pull contentgroup/cqf-ruler:latest
+	docker run --name cqf-ruler --rm -dit -p 8080:8080 contentgroup/cqf-ruler:latest
 	touch .new-cqf-ruler
 
 connectathon:
@@ -153,7 +153,7 @@ VALUESET_FILES = $(shell find $(BASE_DIR)/fhir401/bundles -type f -name "valuese
 	touch .seed-vs
 
 synthea:
-	git clone --single-branch --branch abacus https://github.com/projecttacoma/synthea.git
+	git clone --single-branch --branch abacus-dev https://github.com/projecttacoma/synthea.git
 
 PATIENT_COUNT := 10
 CALC_TYPE := fqm
